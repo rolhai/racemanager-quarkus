@@ -1,0 +1,14 @@
+<h2>Driver Detail</h2>
+<div>
+    <span>{{selectedDriver?.firstname}} </span>
+    <span>{{selectedDriver?.lastname}}</span>
+</div>
+<ul>
+  <li *ngFor="let driver of drivers | async">
+    <button type="button" (click)="onSelect(driver)">
+      <span class="badge">{{driver.id}} </span>
+      <span class="name">{{driver.firstname}} </span>
+      <span class="name">{{driver.lastname}}</span>
+    </button>
+  </li>
+</ul>

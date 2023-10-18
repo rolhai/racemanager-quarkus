@@ -36,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "../resources/META-INF/resources",
               "budgets": [
                 {
                   "type": "initial",

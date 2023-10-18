@@ -46,3 +46,15 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/racemanager-quarkus-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+
+## Build an Run Angular App
+
+```shell script
+ng build
+```
+
+```shell script
+mvn compile quarkus:dev
+```
+
+http://localhost:8080/index.html

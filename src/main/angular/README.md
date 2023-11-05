@@ -26,16 +26,53 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-# dev hints
+## Running angular app with quarkus rest service
 
-## generate component
+Angular runs on port 4200 and calls to the backend will use port 4200.
+To use the backend over port 8080 the following steps have to be done.
 
-```shell script
-ng generate component <componentname>
+### Configure proxy
+
+Update proxy.conf.json
+```
+{
+    "/api/*": {
+        "target": "http://127.0.0.1:8080",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
 ```
 
-## generate service
+### Configure app start
+
+Change package.json
+```
+"start": "ng serve"
+```
+to 
+```
+"start": "ng serve --proxy-config proxy.conf.json"
+```
+
+Run the angular app with
+```shell script
+npm start
+```
+
+# use primeng
+
+## install primeng
 
 ```shell script
-ng generate service <servicenamne>
+npm install primebg
+npm install primeflex
+```
+
+## import styles
+
+update styles.css
+```shell script
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
 ```

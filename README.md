@@ -1,8 +1,16 @@
 # racemanager-quarkus
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project uses **Quarkus**, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+This project uses **Angular** Web Framework.
+
+If you want to learn more about Angular, please visit its website: https://angular.io/ .
+
+This project uses **Primeng** UI Components.
+
+If you want to learn more about Primeng, please visit its website: https://primeng.org/ .
 
 ## Running the application in dev mode
 
@@ -47,14 +55,17 @@ You can then execute your native executable with: `./target/racemanager-quarkus-
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
-## Build an Run Angular App
+
+## Build and run angular app with backend
 
 ```shell script
 ng build
 ```
 
 ```shell script
-mvn compile quarkus:dev
+./mvnw compile quarkus:dev
 ```
+
+start app with
 
 http://localhost:8080/index.html

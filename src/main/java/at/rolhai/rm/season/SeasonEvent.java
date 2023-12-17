@@ -12,11 +12,11 @@ public class SeasonEvent {
     public String name;
 
     /**
-     * order number of the track in the season
+     * order of the track in the season
      * 
      * example: 1
      */
-    public int orderNumber;
+    public int order;
 
     /**
      * ID ot the track

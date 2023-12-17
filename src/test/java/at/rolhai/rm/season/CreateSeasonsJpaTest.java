@@ -3,7 +3,6 @@ package at.rolhai.rm.season;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -129,42 +128,37 @@ public class CreateSeasonsJpaTest {
         teamRepository.persist(redBull);
         Assertions.assertNotNull(redBull.id);
 
-        SeasonEvent hockenheim2023 = new SeasonEvent();
-        hockenheim2023.name = "Großer Preis von Deutschland";
-        hockenheim2023.orderNumber = 1;
-        hockenheim2023.trackId = hockenheimring.id;
-
-        SeasonEvent nuerburgring2023 = new SeasonEvent();
-        nuerburgring2023.name = "Großer Preis von Europa";
-        nuerburgring2023.orderNumber = 2;
-        nuerburgring2023.trackId = nuerburgring.id; 
-
         SeasonEntity season2023 = new SeasonEntity();
         season2023.year = 2023;
         season2023.league = "Formel 1";
-        season2023.name = "WeltseasonEntitymeisterschaft";
+        season2023.name = "Weltmeisterschaft";
         season2023.start = LocalDate.of(2023, Month.APRIL, 24);
-        season2023.events = Arrays.asList(hockenheim2023, nuerburgring2023);
+        new SeasonBuilder()
+            .season(season2023)
+            .team(1, redBull, verstappen, perez)
+            .event("Großer Preis von Deutschland", 1, hockenheimring)
+            .event("Großer Preis von Europa", 2, nuerburgring);
         seasonRepository.persist(season2023);
         Assertions.assertNotNull(season2023.id);
 
         RaceResultEntity hockenheimPole2023 = new RaceResultEntity();
         hockenheimPole2023.eventType = EventType.QUALIFYING;
-        hockenheimPole2023.position = 2;
+        hockenheimPole2023.ranking = 2;
         hockenheimPole2023.eventDate = LocalDate.of(2020, Month.JULY, 17);
         hockenheimPole2023.bestTime = LocalTime.of(1, 24, 37);
         hockenheimPole2023.driverId = verstappen.id; 
         hockenheimPole2023.trackId = hockenheimring.id;
         seasonEventResultRepository.persist(hockenheimPole2023);
+        Assertions.assertNotNull(hockenheimPole2023.id);
         
         RaceResultEntity hockenheimWinner2023 = new RaceResultEntity();
         hockenheimWinner2023.eventType = EventType.RACE;
-        hockenheimWinner2023.position = 1;
+        hockenheimWinner2023.ranking = 1;
         hockenheimWinner2023.eventDate = LocalDate.of(2020, Month.JULY, 18);
         hockenheimWinner2023.bestTime = LocalTime.of(1, 25, 18);
         hockenheimWinner2023.driverId = verstappen.id; 
         hockenheimWinner2023.trackId = hockenheimring.id;
         seasonEventResultRepository.persist(hockenheimWinner2023);
-
+        Assertions.assertNotNull(hockenheimWinner2023.id);
     }
 }

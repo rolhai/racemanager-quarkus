@@ -7,11 +7,11 @@ import org.bson.types.ObjectId;
 public class SeasonTeam {
 
     /**
-     * position of the team in the season
+     * order of the team in the season
      * 
      * example: 1
      */
-    public int position;
+    public int order;
 
     /**
      * ID of the team
@@ -19,7 +19,7 @@ public class SeasonTeam {
     public ObjectId teamId;
 
     /**
-     * list of drivers with the position in the team
+     * list of drivers of the team
      */
     public List<SeasonDriver> drivers;
 

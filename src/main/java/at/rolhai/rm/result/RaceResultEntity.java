@@ -41,11 +41,11 @@ public class RaceResultEntity extends PanacheMongoEntity {
     public String eventType;
 
     /**
-     * Position in the event
+     * ranking for the event
      * 
      * example: 1 ... first place
      */
-    public int position;
+    public int ranking;
 
     /**
      * Best time of the driver for this event

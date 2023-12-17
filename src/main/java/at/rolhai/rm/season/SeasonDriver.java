@@ -5,11 +5,11 @@ import org.bson.types.ObjectId;
 public class SeasonDriver {
     
     /**
-     * position of the driver in the team
+     * order of the driver in the team
      * 
      * example: 1
      */
-    public int position;
+    public int order;
 
     /**
      * ID of the driver

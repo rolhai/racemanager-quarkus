@@ -40,20 +40,27 @@ class TrackJpaTest {
             .findFirst()
             .orElse(null);
         Assertions.assertNotNull(found);
+        Assertions.assertEquals(trackEntity.id, found.id);
+        Assertions.assertEquals(40, found.laps);
 
         // update
         trackEntity.laps = 45;
         trackRepository.update(trackEntity);
 
-        Assertions.assertEquals(40, found.laps);
-        Assertions.assertEquals(45, trackEntity.laps);
-
         count = trackRepository.count();
         Assertions.assertEquals(1, count);
 
-        trackRepository.deleteById(trackEntity.id);
+        // read
+        found = trackRepository.findByFilter("Hockenheimring").stream()
+            .findFirst()
+            .orElse(null);
+        Assertions.assertNotNull(found);
+        Assertions.assertEquals(trackEntity.id, found.id);
+        Assertions.assertEquals(45, found.laps);
 
         // delete
+        trackRepository.deleteById(trackEntity.id);
+
         count = trackRepository.count();
         Assertions.assertEquals(0, count);
     }

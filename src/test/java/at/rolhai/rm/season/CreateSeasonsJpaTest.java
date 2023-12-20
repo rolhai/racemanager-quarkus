@@ -142,6 +142,7 @@ public class CreateSeasonsJpaTest {
         Assertions.assertNotNull(season2023.id);
 
         RaceResultEntity hockenheimPole2023 = new RaceResultEntity();
+        hockenheimPole2023.seasonId = season2023.id;
         hockenheimPole2023.eventType = EventType.QUALIFYING;
         hockenheimPole2023.ranking = 2;
         hockenheimPole2023.eventDate = LocalDate.of(2020, Month.JULY, 17);
@@ -152,6 +153,7 @@ public class CreateSeasonsJpaTest {
         Assertions.assertNotNull(hockenheimPole2023.id);
         
         RaceResultEntity hockenheimWinner2023 = new RaceResultEntity();
+        hockenheimWinner2023.seasonId = season2023.id;
         hockenheimWinner2023.eventType = EventType.RACE;
         hockenheimWinner2023.ranking = 1;
         hockenheimWinner2023.eventDate = LocalDate.of(2020, Month.JULY, 18);

@@ -13,9 +13,10 @@ class DriversResourceTest {
     @Test
     void loadDrivers() {
         given()
-            .when().get("api/drivers")
+            .when()
+                .get("api/drivers")
             .then()
-            .statusCode(Response.Status.OK.getStatusCode()); 
+                .statusCode(Response.Status.OK.getStatusCode());
     }
     
 }

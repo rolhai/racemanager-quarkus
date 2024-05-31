@@ -1,7 +1,5 @@
 package at.rolhai.rm.app;
 
-import java.util.logging.LoggingPermission;
-
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
@@ -17,16 +15,12 @@ public class AppLifecycle {
     private static final Logger LOGGER = Logger.getLogger(AppLifecycle.class);
 
     @ConfigProperty(name = "quarkus.application.version")
-    String version;
-
-    @ConfigProperty(name = "quarkus.mongodb.database")
-    String database;
+    String version;    
 
     void onStart(@Observes StartupEvent ev) {               
         LOGGER.info("The application is starting...");
         LOGGER.info("profile: " + ProfileManager.getLaunchMode().getDefaultProfile());
         LOGGER.info("version: " + version);
-        LOGGER.info("database: " + database);
     }
 
     void onStop(@Observes ShutdownEvent ev) {               

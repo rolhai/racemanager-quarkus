@@ -1,4 +1,4 @@
-package at.rolhai.rm.season;
+package at.rolhai.rm.event;
 
 public class EventType {
 

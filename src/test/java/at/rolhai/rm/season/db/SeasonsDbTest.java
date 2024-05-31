@@ -1,45 +1,37 @@
-package at.rolhai.rm.season;
+package at.rolhai.rm.season.db;
+
+import at.rolhai.rm.country.db.CountryEntity;
+import at.rolhai.rm.country.db.CountryRepository;
+import at.rolhai.rm.driver.db.DriverEntity;
+import at.rolhai.rm.driver.db.DriverRepository;
+import at.rolhai.rm.event.db.EventEntity;
+import at.rolhai.rm.event.db.EventRepository;
+import at.rolhai.rm.result.db.RaceResultEntity;
+import at.rolhai.rm.result.db.RaceResultRepository;
+import at.rolhai.rm.event.EventType;
+import at.rolhai.rm.team.db.TeamEntity;
+import at.rolhai.rm.team.db.TeamRepository;
+import io.quarkus.test.TestTransaction;
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import at.rolhai.rm.company.CompanyEntity;
-import at.rolhai.rm.company.CompanyRepository;
-import at.rolhai.rm.country.CountryEntity;
-import at.rolhai.rm.country.CountryRepository;
-import at.rolhai.rm.driver.DriverEntity;
-import at.rolhai.rm.driver.DriverRepository;
-import at.rolhai.rm.result.RaceResultEntity;
-import at.rolhai.rm.result.RaceResultRepository;
-import at.rolhai.rm.team.TeamEntity;
-import at.rolhai.rm.team.TeamRepository;
-import at.rolhai.rm.track.TrackEntity;
-import at.rolhai.rm.track.TrackRepository;
-import io.quarkus.test.TestTransaction;
-import io.quarkus.test.junit.QuarkusTest;
-import jakarta.inject.Inject;
-
 @QuarkusTest
-public class CreateSeasonsJpaTest {
+class SeasonsDbTest {
 
     @Inject
-    TrackRepository trackRepository;
+    EventRepository eventRepository;
 
     @Inject
     DriverRepository driverRepository;
 
     @Inject
-    RaceResultRepository eventResultRepository;
-
-    @Inject
     CountryRepository countryRepository;
-
-    @Inject
-    CompanyRepository companyRepository;
 
     @Inject
     TeamRepository teamRepository;
@@ -48,11 +40,11 @@ public class CreateSeasonsJpaTest {
     SeasonRepository seasonRepository;
 
     @Inject
-    RaceResultRepository seasonEventResultRepository;
+    RaceResultRepository raceResultRepository;
     
     @Test
     @TestTransaction
-    void saveEventResult() {
+    void saveSeasonData() {
         CountryEntity britain = new CountryEntity();
         britain.iocCode = "GBR";
         britain.name = "Großbritannien";
@@ -86,7 +78,7 @@ public class CreateSeasonsJpaTest {
         DriverEntity verstappen = new DriverEntity();
         verstappen.firstname = "Max";
         verstappen.lastname = "Verstappen";
-        verstappen.countryId = netherlands.id;
+        verstappen.countryCode = netherlands.iocCode;
         driverRepository.persist(verstappen);
         Assertions.assertNotNull(verstappen);
         Assertions.assertNotNull(verstappen.id);
@@ -94,50 +86,42 @@ public class CreateSeasonsJpaTest {
         DriverEntity perez = new DriverEntity();
         perez.firstname = "Sergio";
         perez.lastname = "Perez";
-        perez.countryId = mexico.id;
+        perez.countryCode = mexico.iocCode;
         driverRepository.persist(perez);
         Assertions.assertNotNull(perez.id);
 
-        TrackEntity hockenheimring = new TrackEntity();
-        hockenheimring.name = "Hockenheimring";
+        EventEntity hockenheimring = new EventEntity();
+        hockenheimring.eventName = "Großer Preis von Deutschland";
+        hockenheimring.trackName = "Hockenheimring";
         hockenheimring.location = "Hockenheim";
-        hockenheimring.countryId = germany.id;
-        trackRepository.persist(hockenheimring);
+        hockenheimring.countryCode = germany.iocCode;
+        eventRepository.persist(hockenheimring);
         Assertions.assertNotNull(hockenheimring.id);
 
-        TrackEntity nuerburgring = new TrackEntity();
-        nuerburgring.name = "Nürburgring";
+        EventEntity nuerburgring = new EventEntity();
+        nuerburgring.eventName = "Großer Preis von Europa";
+        nuerburgring.trackName = "Nürburgring";
         nuerburgring.location = "Nürbung";
-        nuerburgring.countryId = germany.id;
-        trackRepository.persist(nuerburgring);
+        nuerburgring.countryCode = germany.iocCode;
+        eventRepository.persist(nuerburgring);
         Assertions.assertNotNull(nuerburgring.id);
-
-        CompanyEntity redBullRacing = new CompanyEntity();
-        redBullRacing.name = "Red Bull Racing";
-        redBullRacing.location = "Milton Keynes";
-        redBullRacing.countryId = britain.id;
-        companyRepository.persist(redBullRacing);
-        Assertions.assertNotNull(redBullRacing.id);
 
         TeamEntity redBull = new TeamEntity();
         redBull.name = "Red Bull";
-        redBull.engine = "Honda RBPT";
-        redBull.chassis = "RB19";
-        redBull.licenceCountryId = austria.id;
-        redBull.companyId = redBullRacing.id;
+        redBull.engine = "Honda";
+        redBull.companyLocation = "Milton Keynes";
+        redBull.companyCountryCode = britain.iocCode;
+        redBull.licenceCountryCode = austria.iocCode;
         teamRepository.persist(redBull);
         Assertions.assertNotNull(redBull.id);
 
         SeasonEntity season2023 = new SeasonEntity();
-        season2023.year = 2023;
+        season2023.seasonYear = 2023;
         season2023.league = "Formel 1";
-        season2023.name = "Weltmeisterschaft";
-        season2023.start = LocalDate.of(2023, Month.APRIL, 24);
-        new SeasonBuilder()
-            .season(season2023)
-            .team(1, redBull, verstappen, perez)
-            .event("Großer Preis von Deutschland", 1, hockenheimring)
-            .event("Großer Preis von Europa", 2, nuerburgring);
+        season2023.seasonName = "Weltmeisterschaft";
+        season2023.simulation = "F1 23";
+        season2023.startDate = LocalDate.of(2023, Month.APRIL, 24);
+        season2023.endDate = LocalDate.of(2023, Month.NOVEMBER, 19);
         seasonRepository.persist(season2023);
         Assertions.assertNotNull(season2023.id);
 
@@ -147,9 +131,10 @@ public class CreateSeasonsJpaTest {
         hockenheimPole2023.ranking = 2;
         hockenheimPole2023.eventDate = LocalDate.of(2020, Month.JULY, 17);
         hockenheimPole2023.bestTime = LocalTime.of(1, 24, 37);
-        hockenheimPole2023.driverId = verstappen.id; 
-        hockenheimPole2023.trackId = hockenheimring.id;
-        seasonEventResultRepository.persist(hockenheimPole2023);
+        hockenheimPole2023.driverFirstname = verstappen.firstname;
+        hockenheimPole2023.driverLastname = verstappen.lastname;
+        hockenheimPole2023.trackName = hockenheimring.trackName;
+        raceResultRepository.persist(hockenheimPole2023);
         Assertions.assertNotNull(hockenheimPole2023.id);
         
         RaceResultEntity hockenheimWinner2023 = new RaceResultEntity();
@@ -158,9 +143,10 @@ public class CreateSeasonsJpaTest {
         hockenheimWinner2023.ranking = 1;
         hockenheimWinner2023.eventDate = LocalDate.of(2020, Month.JULY, 18);
         hockenheimWinner2023.bestTime = LocalTime.of(1, 25, 18);
-        hockenheimWinner2023.driverId = verstappen.id; 
-        hockenheimWinner2023.trackId = hockenheimring.id;
-        seasonEventResultRepository.persist(hockenheimWinner2023);
+        hockenheimWinner2023.driverFirstname = verstappen.firstname;
+        hockenheimWinner2023.driverLastname = verstappen.lastname;
+        hockenheimWinner2023.trackName = hockenheimring.trackName;
+        raceResultRepository.persist(hockenheimWinner2023);
         Assertions.assertNotNull(hockenheimWinner2023.id);
     }
 }

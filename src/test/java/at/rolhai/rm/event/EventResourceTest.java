@@ -1,4 +1,4 @@
-package at.rolhai.rm.track;
+package at.rolhai.rm.event;
 
 import static io.restassured.RestAssured.given;
 
@@ -8,13 +8,14 @@ import io.quarkus.test.junit.QuarkusTest;
 import jakarta.ws.rs.core.Response;
 
 @QuarkusTest
-class TrackResourceTest {
+class EventResourceTest {
     
     @Test
-    void loadTracks() {
+    void loadEvents() {
         given()
-            .when().get("api/tracks")
+            .when()
+                .get("api/events")
             .then()
-            .statusCode(Response.Status.OK.getStatusCode()); 
+                .statusCode(Response.Status.OK.getStatusCode());
     }
 }

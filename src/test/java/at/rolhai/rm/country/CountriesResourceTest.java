@@ -13,8 +13,9 @@ class CountriesResourceTest {
     @Test
     void loadCountries() {
         given()
-            .when().get("api/countries")
+            .when()
+                .get("api/countries")
             .then()
-            .statusCode(Response.Status.OK.getStatusCode()); 
+                .statusCode(Response.Status.OK.getStatusCode());
     }
 }

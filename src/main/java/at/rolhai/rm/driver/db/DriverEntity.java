@@ -1,23 +1,27 @@
-package at.rolhai.rm.driver;
+package at.rolhai.rm.driver.db;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
-
-import org.bson.types.ObjectId;
-
-import io.quarkus.mongodb.panache.PanacheMongoEntity;
-import io.quarkus.mongodb.panache.common.MongoEntity;
 
 /**
  * A race driver of a team
  */
-@MongoEntity(collection="Driver")
-public class DriverEntity extends PanacheMongoEntity {
+@Entity(name="race_drivers")
+public class DriverEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
     /**
-     * personel number of the driver
-     * 
-     * @see https://en.wikipedia.org/wiki/List_of_Formula_One_driver_numbers
-     * 
+     * personal number of the driver
+     *
+     * <a href="https://en.wikipedia.org/wiki/List_of_Formula_One_driver_numbers">see list of drivers</a>
+     *
      * example: 33
      */
     public Long number;
@@ -46,7 +50,7 @@ public class DriverEntity extends PanacheMongoEntity {
      * 
      * mapped to CountryEntity.id
      */
-    public ObjectId countryId;
+    public String countryCode;
 
     /**
      * website of the driver

@@ -1,5 +1,7 @@
 package at.rolhai.rm.season.db;
 
+import at.rolhai.rm.app.DateTimeConfiguration;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -15,12 +17,14 @@ public class SeasonEntity {
      * The beginning of the season
      */
     @Column(columnDefinition = "DATE")
+    @JsonbDateFormat(value = DateTimeConfiguration.DATE_FORMAT)
     public LocalDate startDate;
 
     /**
      * End of the season
      */
     @Column(columnDefinition = "DATE")
+    @JsonbDateFormat(value = DateTimeConfiguration.DATE_FORMAT)
     public LocalDate endDate;
 
     /**

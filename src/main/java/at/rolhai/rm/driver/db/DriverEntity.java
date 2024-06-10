@@ -1,5 +1,7 @@
 package at.rolhai.rm.driver.db;
 
+import at.rolhai.rm.app.DateTimeConfiguration;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -43,6 +45,7 @@ public class DriverEntity {
     /**
      * day of birth
      */
+    @JsonbDateFormat(value = DateTimeConfiguration.DATE_FORMAT)
     public LocalDate birthday;
 
     /**

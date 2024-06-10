@@ -134,6 +134,7 @@ class SeasonsDbTest {
         hockenheimPole2023.driverFirstname = verstappen.firstname;
         hockenheimPole2023.driverLastname = verstappen.lastname;
         hockenheimPole2023.trackName = hockenheimring.trackName;
+        hockenheimPole2023.teamName = redBull.name;
         raceResultRepository.persist(hockenheimPole2023);
         Assertions.assertNotNull(hockenheimPole2023.id);
         
@@ -146,6 +147,7 @@ class SeasonsDbTest {
         hockenheimWinner2023.driverFirstname = verstappen.firstname;
         hockenheimWinner2023.driverLastname = verstappen.lastname;
         hockenheimWinner2023.trackName = hockenheimring.trackName;
+        hockenheimWinner2023.teamName = redBull.name;
         raceResultRepository.persist(hockenheimWinner2023);
         Assertions.assertNotNull(hockenheimWinner2023.id);
     }

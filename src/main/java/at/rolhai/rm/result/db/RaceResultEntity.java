@@ -1,8 +1,11 @@
 package at.rolhai.rm.result.db;
 
+import at.rolhai.rm.app.DateTimeConfiguration;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity(name="race_results")
@@ -23,6 +26,7 @@ public class RaceResultEntity {
      * example: 01.06.2021
      */
     @Column(columnDefinition = "DATE")
+    @JsonbDateFormat(value = DateTimeConfiguration.DATE_FORMAT)
     public LocalDate eventDate;
 
     /**
@@ -54,6 +58,13 @@ public class RaceResultEntity {
     public String driverLastname;
 
     /**
+     * name of the team
+     *
+     * example: Red Bull
+     */
+    public String teamName;
+
+    /**
      * ranking for the event
      * 
      * example: 1 ... first place
@@ -63,9 +74,10 @@ public class RaceResultEntity {
     /**
      * Best time of the driver for this event
      * 
-     * example: 1:36:24
+     * example: 00:01:36.245
      */
     @Column(columnDefinition = "TIME")
+    @JsonbDateFormat(value = DateTimeConfiguration.TIME_FORMAT)
     public LocalTime bestTime;
     
 }

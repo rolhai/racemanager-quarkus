@@ -2,6 +2,7 @@ package at.rolhai.rm.result.db;
 
 import at.rolhai.rm.app.DateTimeConfiguration;
 import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -71,13 +72,46 @@ public class RaceResultEntity {
      */
     public Integer ranking;
 
+    @JsonbTransient
+    public Integer bestTimeMinutes;
+
+    @JsonbTransient
+    public Integer bestTimeSeconds;
+
+    @JsonbTransient
+    public Integer bestTimeMilliseconds;
+
     /**
      * Best time of the driver for this event
-     * 
+     *
      * example: 00:01:36.245
      */
-    @Column(columnDefinition = "TIME")
     @JsonbDateFormat(value = DateTimeConfiguration.TIME_FORMAT)
-    public LocalTime bestTime;
-    
+    public LocalTime getBestTime() {
+        return LocalTime.of(0, bestTimeMinutes, bestTimeSeconds, bestTimeMilliseconds);
+    }
+
+    public void setBestTime(LocalTime time) {
+        this.bestTimeMinutes = time.getMinute();
+        this.bestTimeSeconds = time.getSecond();
+        this.bestTimeMilliseconds = time.getNano();
+    }
+
+    @Override
+    public String toString() {
+        return "RaceResultEntity{" +
+                "id=" + id +
+                ", seasonId=" + seasonId +
+                ", eventDate=" + eventDate +
+                ", trackName='" + trackName + '\'' +
+                ", eventType='" + eventType + '\'' +
+                ", driverFirstname='" + driverFirstname + '\'' +
+                ", driverLastname='" + driverLastname + '\'' +
+                ", teamName='" + teamName + '\'' +
+                ", ranking=" + ranking +
+                ", bestTimeMinutes=" + bestTimeMinutes +
+                ", bestTimeSeconds=" + bestTimeSeconds +
+                ", bestTimeMilliseconds=" + bestTimeMilliseconds +
+                '}';
+    }
 }

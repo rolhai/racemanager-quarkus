@@ -130,7 +130,7 @@ class SeasonsDbTest {
         hockenheimPole2023.eventType = EventType.QUALIFYING;
         hockenheimPole2023.ranking = 2;
         hockenheimPole2023.eventDate = LocalDate.of(2020, Month.JULY, 17);
-        hockenheimPole2023.bestTime = LocalTime.of(1, 24, 37);
+        hockenheimPole2023.setBestTime(LocalTime.of(0, 1, 24, 372));
         hockenheimPole2023.driverFirstname = verstappen.firstname;
         hockenheimPole2023.driverLastname = verstappen.lastname;
         hockenheimPole2023.trackName = hockenheimring.trackName;
@@ -143,7 +143,7 @@ class SeasonsDbTest {
         hockenheimWinner2023.eventType = EventType.RACE;
         hockenheimWinner2023.ranking = 1;
         hockenheimWinner2023.eventDate = LocalDate.of(2020, Month.JULY, 18);
-        hockenheimWinner2023.bestTime = LocalTime.of(1, 25, 18);
+        hockenheimWinner2023.setBestTime(LocalTime.of(0, 1, 25, 187));
         hockenheimWinner2023.driverFirstname = verstappen.firstname;
         hockenheimWinner2023.driverLastname = verstappen.lastname;
         hockenheimWinner2023.trackName = hockenheimring.trackName;

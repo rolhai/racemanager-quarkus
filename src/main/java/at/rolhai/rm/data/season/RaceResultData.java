@@ -25,4 +25,18 @@ public class RaceResultData {
 
     @JsonbDateFormat(value = DateTimeConfiguration.TIME_FORMAT)
     public LocalTime bestTime;
+
+    @Override
+    public String toString() {
+        return "RaceResultData{" +
+                "eventDate=" + eventDate +
+                ", trackName='" + trackName + '\'' +
+                ", eventType='" + eventType + '\'' +
+                ", driverFirstname='" + driverFirstname + '\'' +
+                ", driverLastname='" + driverLastname + '\'' +
+                ", teamName='" + teamName + '\'' +
+                ", ranking=" + ranking +
+                ", bestTime=" + bestTime +
+                '}';
+    }
 }

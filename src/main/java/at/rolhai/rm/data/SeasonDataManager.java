@@ -19,7 +19,7 @@ import java.util.List;
 @ApplicationScoped
 public class SeasonDataManager {
 
-    private static final Logger LOGGER = Logger.getLogger(CoreDataManager.class);
+    private static final Logger LOGGER = Logger.getLogger(SeasonDataManager.class);
 
     private static final String DATA_DIR = "./data";
 

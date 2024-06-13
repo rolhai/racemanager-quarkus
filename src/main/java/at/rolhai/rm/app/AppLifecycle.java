@@ -1,13 +1,13 @@
 package at.rolhai.rm.app;
 
-import java.util.logging.LoggingPermission;
-
+import at.rolhai.rm.data.CoreDataManager;
+import at.rolhai.rm.data.SeasonDataManager;
+import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
-import io.quarkus.runtime.configuration.ProfileManager;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 
@@ -19,18 +19,26 @@ public class AppLifecycle {
     @ConfigProperty(name = "quarkus.application.version")
     String version;
 
-    @ConfigProperty(name = "quarkus.mongodb.database")
-    String database;
+    @ConfigProperty(name = "quarkus.profile")
+    String profile;
+
+    @Inject
+    CoreDataManager coreDataManager;
+
+    @Inject
+    SeasonDataManager seasonDataManager;
 
     void onStart(@Observes StartupEvent ev) {               
         LOGGER.info("The application is starting...");
-        LOGGER.info("profile: " + ProfileManager.getLaunchMode().getDefaultProfile());
+        LOGGER.info("profile: " + profile);
         LOGGER.info("version: " + version);
-        LOGGER.info("database: " + database);
+        coreDataManager.initializeCoreData();
+        seasonDataManager.initializeSeasons();;
     }
 
-    void onStop(@Observes ShutdownEvent ev) {               
+    void onStop(@Observes ShutdownEvent ev) {
         LOGGER.info("The application is stopping...");
+
     }
     
 }

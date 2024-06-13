@@ -13,9 +13,10 @@ public class RaceResultResourceTest {
     @Test
     void loadRaceResults() {
         given()
-            .when().get("api/races/results")
+            .when()
+                .get("api/races/results")
             .then()
-            .statusCode(Response.Status.OK.getStatusCode()); 
+                .statusCode(Response.Status.OK.getStatusCode());
     }
     
 }

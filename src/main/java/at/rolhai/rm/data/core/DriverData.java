@@ -2,23 +2,29 @@ package at.rolhai.rm.data.core;
 
 import at.rolhai.rm.app.DateTimeConfiguration;
 import jakarta.json.bind.annotation.JsonbDateFormat;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@ToString
 public class DriverData {
 
-    public Long number;
+    private Long number;
 
-    public String firstname;
+    private String firstname;
 
-    public String lastname;
+    private String lastname;
 
     @JsonbDateFormat(value = DateTimeConfiguration.DATE_FORMAT)
-    public LocalDate birthday;
+    private LocalDate birthday;
 
-    public String countryCode;
+    private String countryCode;
 
-    public String website;
+    private String website;
 
-    public boolean player;
+    private boolean player;
 }

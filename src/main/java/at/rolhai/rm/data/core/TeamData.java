@@ -1,16 +1,23 @@
 package at.rolhai.rm.data.core;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class TeamData {
 
-    public String name;
+    private String name;
 
-    public String engine;
+    private String engine;
 
-    public String companyLocation;
+    private String companyLocation;
 
-    public String companyCountryCode;
+    private String companyCountryCode;
 
-    public String licenceCountryCode;
+    private String licenceCountryCode;
 
-    public String website;
+    private String website;
 }

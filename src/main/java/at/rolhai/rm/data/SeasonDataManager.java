@@ -57,7 +57,7 @@ public class SeasonDataManager {
 
                 // persist race results
                 List<RaceResultEntity> raceResultEntities = raceResultMapper.mapToEntities(seasonData.results);
-                raceResultEntities.forEach(res -> res.seasonId = seasonEntity.id);
+                raceResultEntities.forEach(res -> res.setSeasonId(seasonEntity.getId()));
                 raceResultRepository.persist(raceResultEntities);
             }
         } catch (Exception ex) {

@@ -46,109 +46,109 @@ class SeasonsDbTest {
     @TestTransaction
     void saveSeasonData() {
         CountryEntity britain = new CountryEntity();
-        britain.iocCode = "GBR";
-        britain.name = "Großbritannien";
+        britain.setIocCode("GBR");
+        britain.setName("Großbritannien");
         countryRepository.persist(britain);
-        Assertions.assertNotNull(britain.id);
+        Assertions.assertNotNull(britain.getId());
 
         CountryEntity austria = new CountryEntity();
-        austria.iocCode = "AUT";
-        austria.name = "Österrreich";
+        austria.setIocCode("AUT");
+        austria.setName("Österrreich");
         countryRepository.persist(austria);
-        Assertions.assertNotNull(austria.id);
+        Assertions.assertNotNull(austria.getId());
 
         CountryEntity netherlands = new CountryEntity();
-        netherlands.iocCode = "NED";
-        netherlands.name = "Niederlande";
+        netherlands.setIocCode("NED");
+        netherlands.setName("Niederlande");
         countryRepository.persist(netherlands);
-        Assertions.assertNotNull(netherlands.id);
+        Assertions.assertNotNull(netherlands.getId());
 
         CountryEntity mexico = new CountryEntity();
-        mexico.iocCode = "MEX";
-        mexico.name = "Mexiko";
+        mexico.setIocCode("MEX");
+        mexico.setName("Mexiko");
         countryRepository.persist(mexico);
-        Assertions.assertNotNull(mexico.id);
+        Assertions.assertNotNull(mexico.getId());
 
         CountryEntity germany = new CountryEntity();
-        germany.iocCode = "GER";
-        germany.name = "Deutschland";
+        germany.setIocCode("GER");
+        germany.setName("Deutschland");
         countryRepository.persist(germany);
-        Assertions.assertNotNull(germany.id);
+        Assertions.assertNotNull(germany.getId());
 
         DriverEntity verstappen = new DriverEntity();
-        verstappen.firstname = "Max";
-        verstappen.lastname = "Verstappen";
-        verstappen.countryCode = netherlands.iocCode;
+        verstappen.setFirstname("Max");
+        verstappen.setLastname("Verstappen");
+        verstappen.setCountryCode(netherlands.getIocCode());
         driverRepository.persist(verstappen);
         Assertions.assertNotNull(verstappen);
-        Assertions.assertNotNull(verstappen.id);
+        Assertions.assertNotNull(verstappen.getId());
 
         DriverEntity perez = new DriverEntity();
-        perez.firstname = "Sergio";
-        perez.lastname = "Perez";
-        perez.countryCode = mexico.iocCode;
+        perez.setFirstname("Sergio");
+        perez.setLastname("Perez");
+        perez.setCountryCode(mexico.getIocCode());
         driverRepository.persist(perez);
-        Assertions.assertNotNull(perez.id);
+        Assertions.assertNotNull(perez.getId());
 
         EventEntity hockenheimring = new EventEntity();
-        hockenheimring.eventName = "Großer Preis von Deutschland";
-        hockenheimring.trackName = "Hockenheimring";
-        hockenheimring.location = "Hockenheim";
-        hockenheimring.countryCode = germany.iocCode;
+        hockenheimring.setEventName("Großer Preis von Deutschland");
+        hockenheimring.setTrackName("Hockenheimring");
+        hockenheimring.setLocation("Hockenheim");
+        hockenheimring.setCountryCode(germany.getIocCode());
         eventRepository.persist(hockenheimring);
-        Assertions.assertNotNull(hockenheimring.id);
+        Assertions.assertNotNull(hockenheimring.getId());
 
         EventEntity nuerburgring = new EventEntity();
-        nuerburgring.eventName = "Großer Preis von Europa";
-        nuerburgring.trackName = "Nürburgring";
-        nuerburgring.location = "Nürbung";
-        nuerburgring.countryCode = germany.iocCode;
+        nuerburgring.setEventName("Großer Preis von Europa");
+        nuerburgring.setTrackName("Nürburgring");
+        nuerburgring.setLocation("Nürbung");
+        nuerburgring.setCountryCode(germany.getIocCode());
         eventRepository.persist(nuerburgring);
-        Assertions.assertNotNull(nuerburgring.id);
+        Assertions.assertNotNull(nuerburgring.getId());
 
         TeamEntity redBull = new TeamEntity();
-        redBull.name = "Red Bull";
-        redBull.engine = "Honda";
-        redBull.companyLocation = "Milton Keynes";
-        redBull.companyCountryCode = britain.iocCode;
-        redBull.licenceCountryCode = austria.iocCode;
+        redBull.setName("Red Bull");
+        redBull.setEngine("Honda");
+        redBull.setCompanyLocation("Milton Keynes");
+        redBull.setCompanyCountryCode(britain.getIocCode());
+        redBull.setLicenceCountryCode(austria.getIocCode());
         teamRepository.persist(redBull);
-        Assertions.assertNotNull(redBull.id);
+        Assertions.assertNotNull(redBull.getId());
 
         SeasonEntity season2023 = new SeasonEntity();
-        season2023.seasonYear = 2023;
-        season2023.league = "Formel 1";
-        season2023.seasonName = "Weltmeisterschaft";
-        season2023.simulation = "F1 23";
-        season2023.startDate = LocalDate.of(2023, Month.APRIL, 24);
-        season2023.endDate = LocalDate.of(2023, Month.NOVEMBER, 19);
+        season2023.setSeasonYear(2023);
+        season2023.setLeague("Formel 1");
+        season2023.setSeasonName("Weltmeisterschaft");
+        season2023.setSimulation("F1 23");
+        season2023.setStartDate(LocalDate.of(2023, Month.APRIL, 24));
+        season2023.setEndDate(LocalDate.of(2023, Month.NOVEMBER, 19));
         seasonRepository.persist(season2023);
-        Assertions.assertNotNull(season2023.id);
+        Assertions.assertNotNull(season2023.getId());
 
         RaceResultEntity hockenheimPole2023 = new RaceResultEntity();
-        hockenheimPole2023.seasonId = season2023.id;
-        hockenheimPole2023.eventType = EventType.QUALIFYING;
-        hockenheimPole2023.ranking = 2;
-        hockenheimPole2023.eventDate = LocalDate.of(2020, Month.JULY, 17);
+        hockenheimPole2023.setSeasonId(season2023.getId());
+        hockenheimPole2023.setEventType(EventType.QUALIFYING);
+        hockenheimPole2023.setRanking(2);
+        hockenheimPole2023.setEventDate(LocalDate.of(2020, Month.JULY, 17));
         hockenheimPole2023.setBestTime(LocalTime.of(0, 1, 24, 372));
-        hockenheimPole2023.driverFirstname = verstappen.firstname;
-        hockenheimPole2023.driverLastname = verstappen.lastname;
-        hockenheimPole2023.trackName = hockenheimring.trackName;
-        hockenheimPole2023.teamName = redBull.name;
+        hockenheimPole2023.setDriverFirstname(verstappen.getFirstname());
+        hockenheimPole2023.setDriverLastname(verstappen.getLastname());
+        hockenheimPole2023.setTrackName(hockenheimring.getTrackName());
+        hockenheimPole2023.setTeamName(redBull.getName());
         raceResultRepository.persist(hockenheimPole2023);
-        Assertions.assertNotNull(hockenheimPole2023.id);
+        Assertions.assertNotNull(hockenheimPole2023.getId());
         
         RaceResultEntity hockenheimWinner2023 = new RaceResultEntity();
-        hockenheimWinner2023.seasonId = season2023.id;
-        hockenheimWinner2023.eventType = EventType.RACE;
-        hockenheimWinner2023.ranking = 1;
-        hockenheimWinner2023.eventDate = LocalDate.of(2020, Month.JULY, 18);
+        hockenheimWinner2023.setSeasonId(season2023.getId());
+        hockenheimWinner2023.setEventType(EventType.RACE);
+        hockenheimWinner2023.setRanking(1);
+        hockenheimWinner2023.setEventDate(LocalDate.of(2020, Month.JULY, 18));
         hockenheimWinner2023.setBestTime(LocalTime.of(0, 1, 25, 187));
-        hockenheimWinner2023.driverFirstname = verstappen.firstname;
-        hockenheimWinner2023.driverLastname = verstappen.lastname;
-        hockenheimWinner2023.trackName = hockenheimring.trackName;
-        hockenheimWinner2023.teamName = redBull.name;
+        hockenheimWinner2023.setDriverFirstname(verstappen.getFirstname());
+        hockenheimWinner2023.setDriverLastname(verstappen.getLastname());
+        hockenheimWinner2023.setTrackName(hockenheimring.getTrackName());
+        hockenheimWinner2023.setTeamName(redBull.getName());
         raceResultRepository.persist(hockenheimWinner2023);
-        Assertions.assertNotNull(hockenheimWinner2023.id);
+        Assertions.assertNotNull(hockenheimWinner2023.getId());
     }
 }

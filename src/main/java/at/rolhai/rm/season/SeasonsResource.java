@@ -66,7 +66,7 @@ public interface SeasonsResource extends PanacheRepositoryResource<SeasonReposit
         
         // validate track
         EventRepository eventRepository = getEventRepository();
-        EventEntity eventEntity = eventRepository.findByTrackName(event.trackName);
+        EventEntity eventEntity = eventRepository.findByTrackName(event.getTrackName());
         if (eventEntity == null) {
             throw new WebApplicationException("track not found", Response.Status.BAD_REQUEST);
         }

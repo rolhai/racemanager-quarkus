@@ -1,15 +1,22 @@
 package at.rolhai.rm.data.core;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@ToString
 public class CoreData {
 
-    public List<CountryData> countries;
+    private List<CountryData> countries;
 
-    public List<DriverData> drivers;
+    private List<DriverData> drivers;
 
-    public List<TeamData> teams;
+    private List<TeamData> teams;
 
-    public List<EventData> events;
+    private List<EventData> events;
 }

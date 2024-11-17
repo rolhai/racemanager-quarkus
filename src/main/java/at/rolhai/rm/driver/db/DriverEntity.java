@@ -6,18 +6,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 /**
  * A race driver of a team
  */
+@Getter
+@Setter
+@ToString
 @Entity(name="race_drivers")
 public class DriverEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     /**
      * personal number of the driver
@@ -26,41 +32,39 @@ public class DriverEntity {
      *
      * example: 33
      */
-    public Long number;
+    private Long number;
 
     /**
      * first name of the driver
-     * 
+     *
      * example: Max
      */
-    public String firstname;
-    
+    private String firstname;
+
     /**
      * last name of the driver
-     * 
+     *
      * example: Verstappen
      */
-    public String lastname;
+    private String lastname;
 
     /**
      * day of birth
      */
     @JsonbDateFormat(value = DateTimeConfiguration.DATE_FORMAT)
-    public LocalDate birthday;
+    private LocalDate birthday;
 
     /**
      * nationality of the driver
-     * 
-     * mapped to CountryEntity.id
      */
-    public String countryCode;
+    private String countryCode;
 
     /**
      * website of the driver
-     * 
+     *
      * example: https://de.wikipedia.org/wiki/Max_Verstappen
      */
-    public String website;
+    private String website;
 
-    public boolean player;
+    private boolean player;
 }

@@ -58,10 +58,10 @@ public class CoreDataManager {
     public void initializeCoreData() {
         try {
             CoreData coreData = dataFileManager.loadFromFile(DATA_FILEPATH, CoreData.class);
-            initializeCountries(coreData.countries);
-            initializeDrivers(coreData.drivers);
-            initializeTeams(coreData.teams);
-            initializeEvents(coreData.events);
+            initializeCountries(coreData.getCountries());
+            initializeDrivers(coreData.getDrivers());
+            initializeTeams(coreData.getTeams());
+            initializeEvents(coreData.getEvents());
         } catch (Exception ex) {
             LOGGER.error("load core data failed", ex);
         }
@@ -122,7 +122,7 @@ public class CoreDataManager {
         }
         List<DriverEntity> entities = driverRepository.listAll();
         List<DriverData> data = driverMapper.mapToData(entities);
-        coreData.drivers = data;
+        coreData.setDrivers(data);
         LOGGER.info(String.format("update %d drivers", data.size()));
     }
 
@@ -132,7 +132,7 @@ public class CoreDataManager {
         }
         List<TeamEntity> entities = teamRepository.listAll();
         List<TeamData> data = teamMapper.mapToData(entities);
-        coreData.teams = data;
+        coreData.setTeams(data);
         LOGGER.info(String.format("update %d teams", data.size()));
     }
 
@@ -142,7 +142,7 @@ public class CoreDataManager {
         }
         List<EventEntity> entities = eventRepository.listAll();
         List<EventData> data = eventMapper.mapToData(entities);
-        coreData.events = data;
+        coreData.setEvents(data);
         LOGGER.info(String.format("update %d events", data.size()));
     }
 
@@ -152,7 +152,7 @@ public class CoreDataManager {
         }
         List<CountryEntity> entities = countryRepository.listAll();
         List<CountryData> data = countryMapper.mapToData(entities);
-        coreData.countries = data;
+        coreData.setCountries(data);
         LOGGER.info(String.format("update %d countries", data.size()));
     }
 }

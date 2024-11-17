@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * country of a driver, team or track.<br>
@@ -14,31 +17,34 @@ import jakarta.persistence.Id;
  *
  * <a href="https://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste">see list of ISO countries</a>
  */
+@Getter
+@Setter
+@ToString
 @Entity(name="race_countries")
 public class CountryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     /**
      * IOC code - alpha-3
-     * 
+     * <p>
      * example: AUT
      */
-    public String iocCode;
+    private String iocCode;
 
      /**
      * name of the country
-     * 
+     * <p>
      * example: Österreich
      */
-    public String name;
+     private String name;
 
     /**
      * website
-     * 
+     * <p>
      * example: https://de.wikipedia.org/wiki/%C3%96sterreich
      */
-    public String website;
+    private String website;
 }

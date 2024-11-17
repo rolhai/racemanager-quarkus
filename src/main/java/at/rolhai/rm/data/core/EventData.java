@@ -1,14 +1,21 @@
 package at.rolhai.rm.data.core;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class EventData {
 
-    public String eventName;
+    private String eventName;
 
-    public String trackName;
+    private String trackName;
 
-    public String location;
+    private String location;
 
-    public String countryCode;
+    private String countryCode;
 
-    public String website;
+    private String website;
 }

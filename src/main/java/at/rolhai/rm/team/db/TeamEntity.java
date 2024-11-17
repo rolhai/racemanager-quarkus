@@ -1,59 +1,68 @@
 package at.rolhai.rm.team.db;
 
+import io.smallrye.common.constraint.NotNull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * A racing team
  */
+@Getter
+@Setter
+@ToString
 @Entity(name="race_teams")
 public class TeamEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
     
     /**
      * name of the team
-     * 
+     * <p>
      * example: Red Bull
      */
-    public String name;
+    @NotNull
+    private String name;
 
     /**
      * engine of the race car
-     *
+     * <p>
      * example: Honda
      */
-    public String engine;
+    @NotNull
+    private String engine;
 
     /**
      * company behind the team
-     * 
+     * <p>
      * example: Milton Keynes
      */
-    public String companyLocation;
+    private String companyLocation;
 
     /**
      * the country where the company is located
-     *
+     * <p>
      * example: GBR
      */
-    public String companyCountryCode;
+    private String companyCountryCode;
 
     /**
      * the teams drives with the license from this country
-     *
+     * <p>
      * example: AUT
      */
-    public String licenceCountryCode;
+    private String licenceCountryCode;
 
     /**
      * website
-     *
+     * <p>
      * example: https://de.wikipedia.org/wiki/Red_Bull_Racing
      */
-    public String website;
+    private String website;
 }

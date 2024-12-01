@@ -12,11 +12,13 @@ import java.util.List;
 @ToString
 public class CoreData {
 
+    private List<SeasonData> seasons;
+
     private List<CountryData> countries;
 
-    private List<DriverData> drivers;
+    private List<EventData> events;
 
     private List<TeamData> teams;
 
-    private List<EventData> events;
+    private List<DriverData> drivers;
 }

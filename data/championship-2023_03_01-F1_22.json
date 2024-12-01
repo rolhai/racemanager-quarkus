@@ -1,0 +1,36 @@
+{
+  "simulation": "F1 22",
+  "seasonYear": 2022,
+  "events": [
+    {
+      "orderNumber": 1,
+      "location": "Hockenheim"
+    },
+    {
+      "orderNumber": 2,
+      "location": "Nürburg"
+    }
+  ],
+  "teams": [
+    {
+      "orderNumber": 1,
+      "teamName": "Red Bull",
+      "driver1Firstname": "Max",
+      "driver1Lastname": "Verstappen",
+      "driver2Firstname": "Sergio",
+      "driver2Lastname": "Perez"
+    }
+  ],
+  "results": [
+    {
+      "eventDate": "2022-06-10",
+      "location": "Hockenheim",
+      "eventType": "R",
+      "driverFirstname": "Max",
+      "driverLastname": "Verstappen",
+      "teamName": "Red Bull",
+      "ranking": 1,
+      "bestTime": "00:01:22.234"
+    }
+  ]
+}

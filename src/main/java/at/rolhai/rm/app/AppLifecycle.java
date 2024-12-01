@@ -1,7 +1,7 @@
 package at.rolhai.rm.app;
 
 import at.rolhai.rm.data.CoreDataManager;
-import at.rolhai.rm.data.SeasonDataManager;
+import at.rolhai.rm.data.ChampionshipDataManager;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
@@ -26,14 +26,14 @@ public class AppLifecycle {
     CoreDataManager coreDataManager;
 
     @Inject
-    SeasonDataManager seasonDataManager;
+    ChampionshipDataManager championshipDataManager;
 
     void onStart(@Observes StartupEvent ev) {               
         LOGGER.info("The application is starting...");
         LOGGER.info("profile: " + profile);
         LOGGER.info("version: " + version);
-        coreDataManager.initializeCoreData();
-        seasonDataManager.initializeSeasons();;
+        coreDataManager.importCoreData();
+        championshipDataManager.importSeasons();
     }
 
     void onStop(@Observes ShutdownEvent ev) {

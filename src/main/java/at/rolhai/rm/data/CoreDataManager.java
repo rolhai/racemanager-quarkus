@@ -1,18 +1,21 @@
 package at.rolhai.rm.data;
 
-import at.rolhai.rm.country.CountryMapper;
-import at.rolhai.rm.country.db.CountryEntity;
-import at.rolhai.rm.country.db.CountryRepository;
+import at.rolhai.rm.core.country.CountryMapper;
+import at.rolhai.rm.core.country.db.CountryEntity;
+import at.rolhai.rm.core.country.db.CountryRepository;
+import at.rolhai.rm.core.season.SeasonMapper;
+import at.rolhai.rm.core.season.db.SeasonEntity;
+import at.rolhai.rm.core.season.db.SeasonRepository;
 import at.rolhai.rm.data.core.*;
-import at.rolhai.rm.driver.DriverMapper;
-import at.rolhai.rm.driver.db.DriverEntity;
-import at.rolhai.rm.driver.db.DriverRepository;
-import at.rolhai.rm.event.EventMapper;
-import at.rolhai.rm.event.db.EventEntity;
-import at.rolhai.rm.event.db.EventRepository;
-import at.rolhai.rm.team.TeamMapper;
-import at.rolhai.rm.team.db.TeamEntity;
-import at.rolhai.rm.team.db.TeamRepository;
+import at.rolhai.rm.core.driver.DriverMapper;
+import at.rolhai.rm.core.driver.db.DriverEntity;
+import at.rolhai.rm.core.driver.db.DriverRepository;
+import at.rolhai.rm.core.event.EventMapper;
+import at.rolhai.rm.core.event.db.EventEntity;
+import at.rolhai.rm.core.event.db.EventRepository;
+import at.rolhai.rm.core.team.TeamMapper;
+import at.rolhai.rm.core.team.db.TeamEntity;
+import at.rolhai.rm.core.team.db.TeamRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -25,7 +28,7 @@ public class CoreDataManager {
 
     private static final Logger LOGGER = Logger.getLogger(CoreDataManager.class);
 
-    private static final String DATA_FILEPATH = "./data/core.data";
+    private static final String DATA_FILEPATH = "./data/core_data.json";
 
     @Inject
     DataFileManager dataFileManager;
@@ -43,6 +46,9 @@ public class CoreDataManager {
     CountryRepository countryRepository;
 
     @Inject
+    SeasonRepository seasonRepository;
+
+    @Inject
     DriverMapper driverMapper;
 
     @Inject
@@ -54,105 +60,129 @@ public class CoreDataManager {
     @Inject
     CountryMapper countryMapper;
 
+    @Inject
+    SeasonMapper seasonMapper;
+
     @Transactional
-    public void initializeCoreData() {
+    public void importCoreData() {
         try {
             CoreData coreData = dataFileManager.loadFromFile(DATA_FILEPATH, CoreData.class);
-            initializeCountries(coreData.getCountries());
-            initializeDrivers(coreData.getDrivers());
-            initializeTeams(coreData.getTeams());
-            initializeEvents(coreData.getEvents());
+            importSeasons(coreData.getSeasons());
+            importCountries(coreData.getCountries());
+            importDrivers(coreData.getDrivers());
+            importTeams(coreData.getTeams());
+            importEvents(coreData.getEvents());
         } catch (Exception ex) {
             LOGGER.error("load core data failed", ex);
         }
     }
 
-    public void updateCoreData() {
+    public void exportCoreData() {
         try {
             CoreData coreData = new CoreData();
-            updateCountries(coreData);
-            updateDrivers(coreData);
-            updateTeams(coreData);
-            updateEvents(coreData);
+            exportSeasons(coreData);
+            exportCountries(coreData);
+            exportDrivers(coreData);
+            exportTeams(coreData);
+            exportEvents(coreData);
             dataFileManager.saveToFile(DATA_FILEPATH, coreData);
         } catch (Exception ex) {
             LOGGER.error("save core data failed", ex);
         }
     }
 
-    private void initializeDrivers(List<DriverData> data) {
+    private void importSeasons(List<SeasonData> data) {
+        if (data == null) {
+            return;
+        }
+        List<SeasonEntity> entities = seasonMapper.mapToEntities(data);
+        seasonRepository.persist(entities);
+        LOGGER.info(String.format("import %d seasons", entities.size()));
+    }
+
+    private void importDrivers(List<DriverData> data) {
         if (data == null) {
             return;
         }
         List<DriverEntity> entities = driverMapper.mapToEntities(data);
         driverRepository.persist(entities);
-        LOGGER.info(String.format("init %d drivers", entities.size()));
+        LOGGER.info(String.format("import %d drivers", entities.size()));
     }
 
-    private void initializeTeams(List<TeamData> data) {
+    private void importTeams(List<TeamData> data) {
         if (data == null) {
             return;
         }
         List<TeamEntity> entities = teamMapper.mapToEntities(data);
         teamRepository.persist(entities);
-        LOGGER.info(String.format("init %d teams", entities.size()));
+        LOGGER.info(String.format("import %d teams", entities.size()));
     }
 
-    private void initializeEvents(List<EventData> data) {
+    private void importEvents(List<EventData> data) {
         if (data == null) {
             return;
         }
         List<EventEntity> entities = eventMapper.mapToEntities(data);
         eventRepository.persist(entities);
-        LOGGER.info(String.format("init %d events", entities.size()));
+        LOGGER.info(String.format("import %d events", entities.size()));
     }
 
-    private void initializeCountries(List<CountryData> data) {
+    private void importCountries(List<CountryData> data) {
         if (data == null) {
             return;
         }
         List<CountryEntity> entities = countryMapper.mapToEntities(data);
         countryRepository.persist(entities);
-        LOGGER.info(String.format("init %d countries", entities.size()));
+        LOGGER.info(String.format("import %d countries", entities.size()));
     }
 
-    private void updateDrivers(CoreData coreData) {
+    private void exportSeasons(CoreData coreData) {
+        if (coreData == null) {
+            return;
+        }
+        List<SeasonEntity> entities = seasonRepository.listAll();
+        List<SeasonData> data = seasonMapper.mapToData(entities);
+        coreData.setSeasons(data);
+        LOGGER.info(String.format("export %d seasons", data.size()));
+    }
+
+    private void exportDrivers(CoreData coreData) {
         if (coreData == null) {
             return;
         }
         List<DriverEntity> entities = driverRepository.listAll();
         List<DriverData> data = driverMapper.mapToData(entities);
         coreData.setDrivers(data);
-        LOGGER.info(String.format("update %d drivers", data.size()));
+        LOGGER.info(String.format("export %d drivers", data.size()));
     }
 
-    private void updateTeams(CoreData coreData) {
+    private void exportTeams(CoreData coreData) {
         if (coreData == null) {
             return;
         }
         List<TeamEntity> entities = teamRepository.listAll();
         List<TeamData> data = teamMapper.mapToData(entities);
         coreData.setTeams(data);
-        LOGGER.info(String.format("update %d teams", data.size()));
+        LOGGER.info(String.format("export %d teams", data.size()));
     }
 
-    private void updateEvents(CoreData coreData) {
+    private void exportEvents(CoreData coreData) {
         if (coreData == null) {
             return;
         }
         List<EventEntity> entities = eventRepository.listAll();
         List<EventData> data = eventMapper.mapToData(entities);
         coreData.setEvents(data);
-        LOGGER.info(String.format("update %d events", data.size()));
+        LOGGER.info(String.format("export %d events", data.size()));
     }
 
-    private void updateCountries(CoreData coreData) {
+    private void exportCountries(CoreData coreData) {
         if (coreData == null) {
             return;
         }
         List<CountryEntity> entities = countryRepository.listAll();
         List<CountryData> data = countryMapper.mapToData(entities);
         coreData.setCountries(data);
-        LOGGER.info(String.format("update %d countries", data.size()));
+        LOGGER.info(String.format("export %d countries", data.size()));
     }
 }

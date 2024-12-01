@@ -17,7 +17,7 @@
     <!-- quarkus -->
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.16.3</quarkus.platform.version>
+    <quarkus.platform.version>3.16.4</quarkus.platform.version>
 
     <!-- mapping -->
     <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
@@ -54,7 +54,7 @@
       <artifactId>quarkus-jsonb</artifactId>
     </dependency>
 
-    <!-- database -->
+    <!-- h2 database -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-h2</artifactId>
@@ -63,15 +63,15 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-orm-panache</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-orm-rest-data-panache</artifactId>
+    </dependency>
 
     <!-- rest -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-jsonb</artifactId>
-    </dependency>    
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-hibernate-orm-rest-data-panache</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -95,6 +95,12 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok-mapstruct-binding</artifactId>
       <version>${lombok-mapstruct-binding.version}</version>
+    </dependency>
+
+    <!-- health -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
 
     <!-- test junit / mock -->
@@ -159,15 +165,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${compiler-plugin.version}</version>
-        <configuration>
-          <compilerArgs>
-            <arg>-parameters</arg>
-          </compilerArgs>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>

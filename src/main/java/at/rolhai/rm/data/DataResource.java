@@ -12,8 +12,9 @@ public class DataResource {
     CoreDataManager coreDataManager;
 
     @PUT
+    @Path("export")
     public Response updateCoreData() {
-        coreDataManager.updateCoreData();
+        coreDataManager.exportCoreData();
         return Response.ok().build();
     }
 }

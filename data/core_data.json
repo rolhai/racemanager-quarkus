@@ -1,0 +1,140 @@
+{
+  "seasons": [
+    {
+      "seasonYear": 2022,
+      "league": "Formel 1",
+      "name": "Weltmeisterschaft",
+      "simulation": "F1 22",
+      "events": [
+        {
+          "orderNumber": 1,
+          "location": "Hockenheim"
+        },
+        {
+          "orderNumber": 2,
+          "location": "Nürburg"
+        }
+      ],
+      "teams": [
+        {
+          "orderNumber": 1,
+          "teamName": "Red Bull",
+          "driver1Firstname": "Max",
+          "driver1Lastname": "Verstappen",
+          "driver2Firstname": "Sergio",
+          "driver2Lastname": "Perez"
+        }
+      ]
+    },
+    {
+      "seasonYear": 2023,
+      "league": "Formel 1",
+      "name": "Weltmeisterschaft",
+      "simulation": "F1 23",
+      "events": [
+        {
+          "orderNumber": 1,
+          "location": "Hockenheim"
+        },
+        {
+          "orderNumber": 2,
+          "location": "Nürburg"
+        }
+      ],
+      "teams": [
+        {
+          "orderNumber": 1,
+          "teamName": "Red Bull",
+          "driver1Firstname": "Max",
+          "driver1Lastname": "Verstappen",
+          "driver2Firstname": "Sergio",
+          "driver2Lastname": "Perez"
+        }
+      ]
+    }
+  ],
+  "countries": [
+    {
+      "iocCode": "AUT",
+      "name": "Österreich"
+    },
+    {
+      "iocCode": "ESP",
+      "name": "Spanien"
+    },
+    {
+      "iocCode": "GBR",
+      "name": "Großbritannien"
+    },
+    {
+      "iocCode": "GER",
+      "name": "Deutschland"
+    },
+    {
+      "iocCode": "NED",
+      "name": "Niederlande"
+    },
+    {
+      "iocCode": "MEX",
+      "name": "Mexiko"
+    }
+  ],
+  "drivers": [
+    {
+      "countryCode": "ESP",
+      "firstname": "Fernando",
+      "lastname": "Alonso",
+      "player": false
+    },
+    {
+      "countryCode": "GBR",
+      "firstname": "Lewis",
+      "lastname": "Hamilton",
+      "player": false
+    },
+    {
+      "countryCode": "NED",
+      "firstname": "Max",
+      "lastname": "Verstappen",
+      "player": false
+    },
+    {
+      "countryCode": "MEX",
+      "firstname": "Sergio",
+      "lastname": "Perez",
+      "player": false
+    }
+  ],
+  "teams": [
+    {
+      "name": "Red Bull",
+      "engine": "Honda",
+      "companyLocation": "Milton Keynes",
+      "companyCountryCode": "GBR",
+      "licenceCountryCode": "AUT"
+    }
+  ],
+  "events": [
+    {
+      "eventName": "Großer Preis von Deutschland",
+      "trackName": "Hockenheimring",
+      "location": "Hockenheim",
+      "countryCode": "GER",
+      "website": "https://de.wikipedia.org/wiki/Hockenheimring_Baden-W%C3%BCrttemberg"
+    },
+    {
+      "eventName": "Großer Preis von Europa",
+      "trackName": "Nürburgring",
+      "location": "Nürburg",
+      "countryCode": "GER",
+      "website": "https://de.wikipedia.org/wiki/N%C3%BCrburgring"
+    },
+    {
+      "eventName": "Großer Preis von Österreich",
+      "trackName": "Red Bull Ring",
+      "location": "Spielberg",
+      "countryCode": "AUT",
+      "website": "https://de.wikipedia.org/wiki/Red_Bull_Ring"
+    }
+  ]
+}

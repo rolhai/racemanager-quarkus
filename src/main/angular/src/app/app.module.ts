@@ -4,19 +4,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DriverDetailComponent } from './driver/comp/driver-detail/driver-detail.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     DriverDetailComponent
   ],
+  bootstrap: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
+
 export class AppModule { }

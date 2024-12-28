@@ -1,10 +1,17 @@
 package at.rolhai.rm.data.core;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class CountryData {
 
-    public String iocCode;
+    private String iocCode;
 
-    public String name;
+    private String name;
 
-    public String website;
+    private String website;
 }

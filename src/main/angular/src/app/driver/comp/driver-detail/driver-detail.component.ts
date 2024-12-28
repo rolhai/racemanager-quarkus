@@ -6,9 +6,10 @@ import {Observable, of} from "rxjs";
 import { catchError } from "rxjs/operators";
 
 @Component({
-  selector: 'app-driver-detail',
-  templateUrl: './driver-detail.component.html',
-  styleUrls: ['./driver-detail.component.scss']
+    selector: 'app-driver-detail',
+    templateUrl: './driver-detail.component.html',
+    styleUrls: ['./driver-detail.component.scss'],
+    standalone: false
 })
 export class DriverDetailComponent implements OnInit {
 

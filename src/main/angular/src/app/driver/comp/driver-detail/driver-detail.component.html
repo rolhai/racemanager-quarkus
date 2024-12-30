@@ -1,14 +1,21 @@
 <h2>Driver Overview</h2>
 <div>
-    <span>{{selectedDriver?.firstname}} </span>
-    <span>{{selectedDriver?.lastname}}</span>
+  <span>{{selectedDriver?.firstname}} </span>
+  <span>{{selectedDriver?.lastname}}</span>
 </div>
 <ul>
-  <li *ngFor="let driver of drivers | async">
-    <button type="button" (click)="onSelect(driver)">
-      <span class="badge">{{driver.id}} </span>
-      <span class="name">{{driver.firstname}} </span>
-      <span class="name">{{driver.lastname}}</span>
-    </button>
-  </li>
+  @for (driver of drivers; track driver.id) {
+    <li>
+      <button type="button" (click)="onSelect(driver)">
+        <span class="badge">{{driver.id}} </span>
+        <span class="name">{{driver.firstname}} </span>
+        <span class="name">{{driver.lastname}}</span>
+      </button>
+    </li>
+  } @empty {
+  <span class="option">No drivers found</span>
+  }
 </ul>
+<div class="card flex justify-center">
+  <p-button label="Refresh" (onClick)="onRefresh()"/>
+</div>

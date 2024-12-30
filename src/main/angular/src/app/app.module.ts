@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DriverDetailComponent } from './driver/comp/driver-detail/driver-detail.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DriverDetailComponent
   ],
   bootstrap: [
     AppComponent
@@ -19,7 +20,13 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
     AppRoutingModule
   ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()),
+    provideAnimationsAsync(),
+            providePrimeNG({
+                theme: {
+                    preset: Aura
+                }
+            })
   ]
 })
 
